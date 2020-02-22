@@ -1,0 +1,232 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>中国空间站</title>
+    <link rel="stylesheet" href="css/photo-sphere-viewer.css">
+    <script src="node_modules/three/build/three.js"></script>
+    <script src="node_modules/promise-polyfill/dist/polyfill.js"></script>
+    <script src="node_modules/uevent/uevent.js"></script>
+    <script src="node_modules/dot/doT.js"></script>
+    <script src="node_modules/three/examples/js/controls/DeviceOrientationControls.js"></script><!--引入陀螺仪-->
+    <script type="text/javascript" src="js/photo-sphere-viewer.min.js"></script>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        #photosphere {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="photosphere">
+        <div id="viewer"></div>
+    </div>
+    
+    <script>
+        var panos = [
+            {
+                id:0,
+                url: 'Panoramas/核心舱-节点舱.jpg',
+                desc: '核心舱-节点舱',
+                markers: [
+                    {
+                        id: "1",
+                        image: 'images/pin2.png',
+                        width: 50,
+                        height: 50,
+                        longitude: 1.58,
+                        latitude: -0.2,
+                        anchor: 'bottom center',
+                        tooltip: '实验Ⅰ-工作舱',
+                    },
+                    {
+                        id: "3",
+                        image: 'images/pin2.png',
+                        width: 50,
+                        height: 50,
+                        longitude: -1.58,
+                        latitude: -0.2,
+                        anchor: 'bottom center',
+                        tooltip: '实验舱Ⅱ-大柱段',
+                    },
+                    {
+                        id: "5",
+                        image: 'images/pin2.png',
+                        width: 50,
+                        height: 50,
+                        longitude: 3.1,
+                        latitude: -0.2,
+                        anchor: 'bottom center',
+                        tooltip: '核心舱-工作舱大柱段',
+                    }
+                ]
+            }, {
+                id: 1,
+                url: 'Panoramas/实验Ⅰ-工作舱.jpg',
+                desc: '实验Ⅰ-工作舱',
+                markers: [
+                    {
+                        id: "0",
+                        image: 'images/pin2.png',
+                        width: 50,
+                        height: 50,
+                        longitude: -1.58,
+                        latitude: -0.2,
+                        anchor: 'bottom center',
+                        tooltip: '核心舱-节点舱',
+                    },
+                    {
+                        id: "2",
+                        image: 'images/pin2.png',
+                        width: 50,
+                        height: 50,
+                        longitude: 1.58,
+                        latitude: -0.2,
+                        anchor: 'bottom center',
+                        tooltip: '实验Ⅰ-气阀仓',
+                    }
+                ]
+            }, {
+                id: 2,
+                url: 'Panoramas/实验Ⅰ-气阀仓.jpg',
+                desc: '实验Ⅰ-气阀仓',
+                markers: [
+                    {
+                        id: "1",
+                        image: 'images/pin2.png',
+                        width: 50,
+                        height: 50,
+                        longitude: -1.58,
+                        latitude: -0.2,
+                        anchor: 'bottom center',
+                        tooltip: '实验Ⅰ-工作舱',
+                    }
+                ]
+            }
+            , {
+                id: 3,
+                url: 'Panoramas/实验舱Ⅱ-大柱段.jpg',
+                desc: '实验舱Ⅱ-大柱段',
+                markers: [
+                    {
+                        id: "0",
+                        image: 'images/pin2.png',
+                        width: 50,
+                        height: 50,
+                        longitude: 1.58,
+                        latitude: -0.2,
+                        anchor: 'bottom center',
+                        tooltip: '核心舱-节点舱',
+                    },{
+                        id: "4",
+                        image: 'images/pin2.png',
+                        width: 50,
+                        height: 50,
+                        longitude: -1.58,
+                        latitude: -0.2,
+                        anchor: 'bottom center',
+                        tooltip: '实验舱Ⅱ-小柱段',
+                    }
+                ]
+            }
+            , {
+                id: 4,
+                url: 'Panoramas/实验舱Ⅱ-小柱段.jpg',
+                desc: '实验舱Ⅱ-小柱段',
+                markers: [
+                    {
+                        id: "3",
+                        image: 'images/pin2.png',
+                        width: 50,
+                        height: 50,
+                        longitude: 1.58,
+                        latitude: -0.2,
+                        anchor: 'bottom center',
+                        tooltip: '实验舱Ⅱ-大柱段',
+                    }
+                ]
+            }
+            , {
+                id: 5,
+                url: 'Panoramas/核心舱-工作舱大柱段.jpg',
+                desc: '核心舱-工作舱大柱段',
+                markers: [
+                    {
+                        id: "0",
+                        image: 'images/pin2.png',
+                        width: 50,
+                        height: 50,
+                        longitude: 0,
+                        latitude: -0.1,
+                        anchor: 'bottom center',
+                        tooltip: '核心舱-节点舱',
+                    }, {
+                        id: "6",
+                        image: 'images/pin2.png',
+                        width: 50,
+                        height: 50,
+                        longitude: 3.1,
+                        latitude: -0.1,
+                        anchor: 'bottom center',
+                        tooltip: '核心舱-生活服务舱小柱段',
+                    }
+                ]
+            }
+            , {
+                id: 6,
+                url: 'Panoramas/核心舱-生活服务舱小柱段.jpg',
+                desc: '核心舱-生活服务舱小柱段',
+                markers: [
+                    {
+                        id: "5",
+                        image: 'images/pin2.png',
+                        width: 50,
+                        height: 50,
+                        longitude: 0,
+                        latitude: -0.1,
+                        anchor: 'bottom center',
+                        tooltip: '核心舱-工作舱大柱段',
+                    }
+                ]
+            }
+        ];
+        var PSV = new PhotoSphereViewer({
+            panorama: panos[0].url,
+            caption: panos[0].desc,
+            container: 'viewer',
+            size: {
+                width: '100%',
+                height: '100%'
+            },
+            time_anim: false,
+            fisheye: false,
+            navbar: true,
+            markers: panos[0].markers
+        });
+        
+        PSV.on('select-marker', OnMarkClick)
+        var OnMarkClick = function (marker) {
+            var index = marker.id;
+            PSV.clearMarkers();
+            PSV.setPanorama(panos[index].url, true)
+            for (var m = 0; m < panos[index].markers.length; m++) {
+                PSV.addMarker(panos[index].markers[m]);
+            }
+            PSV.setCaption(panos[index].desc);
+
+        }
+    </script>
+</body>
+</html>
