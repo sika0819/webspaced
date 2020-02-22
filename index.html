@@ -195,7 +195,7 @@
                         width: 50,
                         height: 50,
                         longitude: 0,
-                        latitude: -0.1,
+                        latitude: -0.2,
                         anchor: 'bottom center',
                         tooltip: '核心舱-工作舱大柱段',
                     }
@@ -215,9 +215,7 @@
             navbar: true,
             markers: panos[0].markers
         });
-        
-        PSV.on('select-marker', OnMarkClick)
-        var OnMarkClick = function (marker) {
+        PSV.on('select-marker', function (marker) {
             var index = marker.id;
             PSV.clearMarkers();
             PSV.setPanorama(panos[index].url, true)
@@ -225,8 +223,8 @@
                 PSV.addMarker(panos[index].markers[m]);
             }
             PSV.setCaption(panos[index].desc);
-
-        }
+            
+        })
     </script>
 </body>
 </html>
