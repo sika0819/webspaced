@@ -8,11 +8,11 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>中国空间站</title>
     <link rel="stylesheet" href="css/photo-sphere-viewer.css">
-    <script src="node_modules/three/build/three.js"></script>
-    <script src="node_modules/promise-polyfill/dist/polyfill.js"></script>
-    <script src="node_modules/uevent/uevent.js"></script>
-    <script src="node_modules/dot/doT.js"></script>
-    <script src="node_modules/three/examples/js/controls/DeviceOrientationControls.js"></script><!--引入陀螺仪-->
+    <script src="./node_modules/three/build/three.js"></script>
+    <script src="./node_modules/promise-polyfill/dist/polyfill.js"></script>
+    <script src="./node_modules/uevent/uevent.js"></script>
+    <script src="./node_modules/dot/doT.js"></script>
+    <script src="./node_modules/three/examples/js/controls/DeviceOrientationControls.js"></script><!--引入陀螺仪-->
     <script type="text/javascript" src="js/photo-sphere-viewer.min.js"></script>
     <style>
         html, body {
@@ -38,12 +38,12 @@
         var panos = [
             {
                 id:0,
-                url: 'Panoramas/核心舱-节点舱.jpg',
+                url: './Panoramas/核心舱-节点舱.jpg',
                 desc: '核心舱-节点舱',
                 markers: [
                     {
                         id: "1",
-                        image: 'images/pin2.png',
+                        image: './images/pin2.png',
                         width: 50,
                         height: 50,
                         longitude: 1.58,
@@ -53,7 +53,7 @@
                     },
                     {
                         id: "3",
-                        image: 'images/pin2.png',
+                        image: './images/pin2.png',
                         width: 50,
                         height: 50,
                         longitude: -1.58,
@@ -63,7 +63,7 @@
                     },
                     {
                         id: "5",
-                        image: 'images/pin2.png',
+                        image: './images/pin2.png',
                         width: 50,
                         height: 50,
                         longitude: 3.1,
@@ -74,12 +74,12 @@
                 ]
             }, {
                 id: 1,
-                url: 'Panoramas/实验Ⅰ-工作舱.jpg',
+                url: './Panoramas/实验Ⅰ-工作舱.jpg',
                 desc: '实验Ⅰ-工作舱',
                 markers: [
                     {
                         id: "0",
-                        image: 'images/pin2.png',
+                        image: './images/pin2.png',
                         width: 50,
                         height: 50,
                         longitude: -1.58,
@@ -89,7 +89,7 @@
                     },
                     {
                         id: "2",
-                        image: 'images/pin2.png',
+                        image: './images/pin2.png',
                         width: 50,
                         height: 50,
                         longitude: 1.58,
@@ -100,12 +100,12 @@
                 ]
             }, {
                 id: 2,
-                url: 'Panoramas/实验Ⅰ-气阀仓.jpg',
+                url: './Panoramas/实验Ⅰ-气阀仓.jpg',
                 desc: '实验Ⅰ-气阀仓',
                 markers: [
                     {
                         id: "1",
-                        image: 'images/pin2.png',
+                        image: './images/pin2.png',
                         width: 50,
                         height: 50,
                         longitude: -1.58,
@@ -117,12 +117,12 @@
             }
             , {
                 id: 3,
-                url: 'Panoramas/实验舱Ⅱ-大柱段.jpg',
+                url: './Panoramas/实验舱Ⅱ-大柱段.jpg',
                 desc: '实验舱Ⅱ-大柱段',
                 markers: [
                     {
                         id: "0",
-                        image: 'images/pin2.png',
+                        image: './images/pin2.png',
                         width: 50,
                         height: 50,
                         longitude: 1.58,
@@ -131,7 +131,7 @@
                         tooltip: '核心舱-节点舱',
                     },{
                         id: "4",
-                        image: 'images/pin2.png',
+                        image: './images/pin2.png',
                         width: 50,
                         height: 50,
                         longitude: -1.58,
@@ -143,12 +143,12 @@
             }
             , {
                 id: 4,
-                url: 'Panoramas/实验舱Ⅱ-小柱段.jpg',
+                url: './Panoramas/实验舱Ⅱ-小柱段.jpg',
                 desc: '实验舱Ⅱ-小柱段',
                 markers: [
                     {
                         id: "3",
-                        image: 'images/pin2.png',
+                        image: './images/pin2.png',
                         width: 50,
                         height: 50,
                         longitude: 1.58,
@@ -160,12 +160,12 @@
             }
             , {
                 id: 5,
-                url: 'Panoramas/核心舱-工作舱大柱段.jpg',
+                url: './Panoramas/核心舱-工作舱大柱段.jpg',
                 desc: '核心舱-工作舱大柱段',
                 markers: [
                     {
                         id: "0",
-                        image: 'images/pin2.png',
+                        image: './images/pin2.png',
                         width: 50,
                         height: 50,
                         longitude: 0,
@@ -174,7 +174,7 @@
                         tooltip: '核心舱-节点舱',
                     }, {
                         id: "6",
-                        image: 'images/pin2.png',
+                        image: './images/pin2.png',
                         width: 50,
                         height: 50,
                         longitude: 3.1,
@@ -186,12 +186,12 @@
             }
             , {
                 id: 6,
-                url: 'Panoramas/核心舱-生活服务舱小柱段.jpg',
+                url: './Panoramas/核心舱-生活服务舱小柱段.jpg',
                 desc: '核心舱-生活服务舱小柱段',
                 markers: [
                     {
                         id: "5",
-                        image: 'images/pin2.png',
+                        image: './images/pin2.png',
                         width: 50,
                         height: 50,
                         longitude: 0,
